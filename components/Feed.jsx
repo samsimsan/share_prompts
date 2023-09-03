@@ -3,14 +3,14 @@
 import { useCallback, useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
-          handleTagClick={handleTagClick}
+
         />
       ))}
     </div>
@@ -21,6 +21,10 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [Allposts, setAllPosts] = useState([]);
+
+  const handleTagsAreClicked = (tagArray) => {
+
+  }
 
   const handleSearchChange = (value) => {
     const searchValue = value;
@@ -95,7 +99,7 @@ const Feed = () => {
       {/* to display the prompts */}
       <PromptCardList
         data={Allposts}
-        handleTagClick={() => { }}
+
       />
     </section>
   )

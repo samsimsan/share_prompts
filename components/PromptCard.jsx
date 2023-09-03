@@ -5,12 +5,34 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const PromptCard = ({ post, handleTagClick, handleEditpost, handleDeletepost }) => {
+const PromptCard = ({ post, handleEditpost, handleDeletepost }) => {
 
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
+
+  const handleSendTags = () => {
+
+    const strTag = post.tag;
+    let tags = strTag.substr(0).split(",")
+    tags = tags.map((t) => {
+      return t.trim()
+    })
+
+    return (tags.map((tag, index) => {
+      return (
+        <p key={index} className="font-inter text-sm blue_gradient cursor-pointer inline px-0.5"
+          onClick={(e) => {
+            console.log(tag)
+          }}
+        >
+          #{tag}
+        </p>);
+    }))
+
+
+  }
 
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -53,31 +75,31 @@ const PromptCard = ({ post, handleTagClick, handleEditpost, handleDeletepost }) 
       <p className="my-4 font-satoshi text-sm text-gray-700">
         {post.prompt}
       </p>
-      <p className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
-      >
-        #{post.tag}
-      </p>
+      <>
 
+        {handleSendTags()}
+      </>
       {/* we show the edit and delete buttons if the session is active and the pathname is ./profile */}
-      {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className="mt-5 flex-center gap-4 border-t border-gray-200 pt-3
+      {
+        session?.user.id === post.creator._id && pathName === "/profile" && (
+          <div className="mt-5 flex-center gap-4 border-t border-gray-200 pt-3
         ">
-          <p
-            className="font-inter text-sm green_gradient cursor-pointer hover:text-green-500"
-            onClick={handleEditpost}
-          >
-            Edit
-          </p>
-          <p
-            className="font-inter text-sm orange_gradient cursor-pointer hover:text-orange-500"
-            onClick={handleDeletepost}
-          >
-            Delete
-          </p>
-        </div>
-      )}
-    </div>
+            <p
+              className="font-inter text-sm green_gradient cursor-pointer hover:text-green-500"
+              onClick={handleEditpost}
+            >
+              Edit
+            </p>
+            <p
+              className="font-inter text-sm orange_gradient cursor-pointer hover:text-orange-500"
+              onClick={handleDeletepost}
+            >
+              Delete
+            </p>
+          </div>
+        )
+      }
+    </div >
   )
 }
 
