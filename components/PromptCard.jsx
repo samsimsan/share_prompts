@@ -12,7 +12,7 @@ const PromptCard = ({ post, handleEditpost, handleDeletepost }) => {
   const pathName = usePathname();
   const router = useRouter();
 
-  const handleSendTags = () => {
+  const handleShowTags = () => {
 
     const strTag = post.tag;
     let tags = strTag.substr(0).split(",")
@@ -77,7 +77,7 @@ const PromptCard = ({ post, handleEditpost, handleDeletepost }) => {
       </p>
       <>
 
-        {handleSendTags()}
+        {handleShowTags()}
       </>
       {/* we show the edit and delete buttons if the session is active and the pathname is ./profile */}
       {
