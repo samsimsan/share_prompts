@@ -3,14 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-const PromptCard = ({ post, handleEditpost, handleDeletepost }) => {
+const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDeletepost }) => {
 
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();
-  const router = useRouter();
 
   const handleShowTags = () => {
 
@@ -22,9 +21,9 @@ const PromptCard = ({ post, handleEditpost, handleDeletepost }) => {
 
     return (tags.map((tag, index) => {
       return (
-        <p key={index} className="font-inter text-sm blue_gradient cursor-pointer inline px-0.5"
+        <p key={index} className="font-inter text-sm text-cyan-700 cursor-pointer inline px-0.5 hover:underline underline-offset-4 "
           onClick={(e) => {
-            console.log(tag)
+            prompthandleTagsAreClicked(tag)
           }}
         >
           #{tag}

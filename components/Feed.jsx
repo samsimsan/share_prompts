@@ -3,14 +3,14 @@
 import { useCallback, useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
-const PromptCardList = ({ data }) => {
+const PromptCardList = ({ data, handleTagsAreClicked }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
-
+          prompthandleTagsAreClicked={handleTagsAreClicked}
         />
       ))}
     </div>
@@ -20,18 +20,23 @@ const PromptCardList = ({ data }) => {
 // this is for the feed 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
+  const [inputText, setInputText] = useState("");
   const [Allposts, setAllPosts] = useState([]);
 
-  const handleTagsAreClicked = (tagArray) => {
-
+  const handleTagsAreClicked = (tag) => {
+    const searchValue = "#" + tag;
+    setInputText(searchValue)
+    setSearchText(searchValue);
   }
 
   const handleSearchChange = (value) => {
+    console.log("handleSearchChange called");
     const searchValue = value;
     setSearchText(searchValue);
   }
 
   const debounce = (func) => {
+    console.log("debounce func called");
     let timer;
     return function (...args) {
       const context = this;
@@ -39,35 +44,45 @@ const Feed = () => {
       timer = setTimeout(() => {
         timer = null;
         func.apply(context, args);
-      }, 1000);
+      }, 500);
     };
   };
 
-  const optimizedFn = useCallback(debounce(handleSearchChange), []);
+  const optimizedFn = useCallback(debounce(handleSearchChange), []); // I used this here to have the debouce func get cached.
 
   //whenever there is a update to searchText, run this effect:
   useEffect(() => {
-    const filteredData = []
+    console.log("useeffect called");
+    const filteredPrompts = []
+    const filteredTags = []
     if (searchText !== "") {
       Allposts.forEach(element => {
         let prompt = element.prompt;
-        if (prompt.startsWith(searchText)) {
-          filteredData.push(element);
+        let tag = element.tag;
+        let clickedTag = searchText.substring(1);
+
+        if (searchText.startsWith("#") && tag.includes(clickedTag)) {
+          console.log("useeffect: its a tag!");
+          filteredTags.push(element);
+          setAllPosts(filteredTags)
+        }
+        if (!(searchText.startsWith("#")) && prompt.startsWith(searchText)) {
+          console.log("useeffect: its a prompt!");
+          filteredPrompts.push(element);
+          setAllPosts(filteredPrompts)
         }
       });
-      setAllPosts(filteredData)
     }
     else {
+      console.log("useeffect: Nothing found!");
       const fetchPosts = async () => {
         const response = await fetch("/api/prompt");
         const data = await response.json();
-
         setAllPosts(data);
       }
-      // calling the function here inside useEffect
       fetchPosts();
     }
-
+    console.log("---------------------------------");
   }, [searchText])
 
   //api call in the begining to fill the feed with the data
@@ -88,9 +103,14 @@ const Feed = () => {
       <form className="relative w-full flex-center">
         <input
           type="text"
+          value={inputText}
           placeholder="Enter a tag of username"
           // value={searchText}
-          onChange={(e) => optimizedFn(e.target.value)}
+          onChange={(e) => {
+            setInputText(e.target.value);
+            // console.log("on change happened:",e.target.value)
+            optimizedFn(e.target.value)
+          }}
           required
           className="search_input peer"  //the peer class is used to style the element's siblings using its present state. Look in tailwind docs
         />
@@ -99,7 +119,7 @@ const Feed = () => {
       {/* to display the prompts */}
       <PromptCardList
         data={Allposts}
-
+        handleTagsAreClicked={handleTagsAreClicked}
       />
     </section>
   )
