@@ -23,7 +23,7 @@ const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDe
       return (
         <p key={index} className="font-inter text-sm text-cyan-700 cursor-pointer inline px-0.5 hover:underline underline-offset-4 "
           onClick={(e) => {
-            prompthandleTagsAreClicked(tag)
+            prompthandleTagsAreClicked && prompthandleTagsAreClicked(tag)
           }}
         >
           #{tag}
