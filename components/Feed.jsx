@@ -30,13 +30,11 @@ const Feed = () => {
   }
 
   const handleSearchChange = (value) => {
-    console.log("handleSearchChange called");
     const searchValue = value;
     setSearchText(searchValue);
   }
 
   const debounce = (func) => {
-    console.log("debounce func called");
     let timer;
     return function (...args) {
       const context = this;
@@ -52,7 +50,6 @@ const Feed = () => {
 
   //whenever there is a update to searchText, run this effect:
   useEffect(() => {
-    console.log("useeffect called");
     const filteredPrompts = []
     const filteredTags = []
     if (searchText !== "") {
@@ -62,19 +59,16 @@ const Feed = () => {
         let clickedTag = searchText.substring(1);
 
         if (searchText.startsWith("#") && tag.includes(clickedTag)) {
-          console.log("useeffect: its a tag!");
           filteredTags.push(element);
           setAllPosts(filteredTags)
         }
         if (!(searchText.startsWith("#")) && prompt.startsWith(searchText)) {
-          console.log("useeffect: its a prompt!");
           filteredPrompts.push(element);
           setAllPosts(filteredPrompts)
         }
       });
     }
     else {
-      console.log("useeffect: Nothing found!");
       const fetchPosts = async () => {
         const response = await fetch("/api/prompt");
         const data = await response.json();
@@ -82,7 +76,6 @@ const Feed = () => {
       }
       fetchPosts();
     }
-    console.log("---------------------------------");
   }, [searchText])
 
   //api call in the begining to fill the feed with the data
@@ -108,7 +101,7 @@ const Feed = () => {
           // value={searchText}
           onChange={(e) => {
             setInputText(e.target.value);
-            // console.log("on change happened:",e.target.value)
+          
             optimizedFn(e.target.value)
           }}
           required

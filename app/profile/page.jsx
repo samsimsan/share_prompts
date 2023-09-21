@@ -55,7 +55,7 @@ const MyProfile = () => {
     return (
         <Profile
             profname={session?.user.name}
-            desc="Welcome to your profile page"
+            desc="Welcome to your profile page, where you can effortlessly manage and organize all your ChatGPT prompts. Here, you have the power to view, edit, and delete your prompts with ease, ensuring a seamless experience."
             data={posts}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
