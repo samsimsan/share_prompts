@@ -23,7 +23,9 @@ const Nav = () => {
     setUpProviders();
   }, [])
 
-
+const handleTheme = () => {
+  console.log("Theme change please!");
+}
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -44,10 +46,11 @@ const Nav = () => {
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn">
+            <button className="outline_btn active:bg-white active:text-black" onClick={handleTheme}>Dark</button>
+            <Link href="/create-prompt" className="black_btn active:bg-black active:text-white">
               Create Post
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button type="button" onClick={signOut} className="outline_btn active:bg-white active:text-black">
               Sign Out
             </button>
             <Link href="/profile">
