@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { ThemeContext } from "@app/layout";
+
 const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDeletepost }) => {
 
+  const {isThemeDark} = useContext(ThemeContext);
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();
@@ -28,7 +31,7 @@ const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDe
     })
     return (tags.map((tag, index) => {
       return (
-        <p key={index} className="font-inter text-sm text-cyan-700 cursor-pointer inline px-0.5 hover:underline underline-offset-4 "
+        <p key={index} className={`font-inter text-sm ${isThemeDark?"text-cyan-300":"text-cyan-700"} cursor-pointer inline px-0.5 hover:underline underline-offset-4 `}
           onClick={(e) => {
             prompthandleTagsAreClicked && prompthandleTagsAreClicked(tag)
           }}
@@ -60,10 +63,10 @@ const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDe
             className="rounded-full object-contain"
           />
           <div className="flex flex-col">
-            <h3 className="font-satoshi font-semibold text-gray-900">
+            <h3 className={`font-satoshi font-semibold ${isThemeDark?"text-[#dfdfdf]":"text-gray-900"}`}>
               {post.creator.username}
             </h3>
-            <p className="font-inter text-sm text-gray-500">
+            <p className={`font-inter text-sm ${isThemeDark?"text-gray-400":"text-gray-500"}`}>
               {post.creator.email}
             </p>
           </div>
@@ -80,7 +83,7 @@ const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDe
           />
         </div>
       </div>
-      <p className="my-4 font-satoshi text-sm text-gray-700">
+      <p className={`my-4 font-satoshi text-sm ${isThemeDark?"text-gray-200":"text-gray-700"}`}>
         {post.prompt}
       </p>
       <>

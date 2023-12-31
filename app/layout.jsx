@@ -1,9 +1,13 @@
+"use client";
+
 import "@styles/globals.css";
 
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 
-import ThemeProvider from "@Providers/ThemeProvider";
+import { createContext, useState } from "react";
+
+export const ThemeContext = createContext();
 
 export const metadata = {
     title: "Promptopia",
@@ -11,11 +15,14 @@ export const metadata = {
 }
 
 const RootLayout = ({ children }) => {
+
+    const [isThemeDark, setIsThemeDark] = useState(false);
+
     return (
-        <html lang="en">
-            <body>
-                <Provider>
-                    <ThemeProvider>
+        <ThemeContext.Provider value={{isThemeDark, setIsThemeDark}}>
+            <html lang="en">
+                <body className={`${isThemeDark?"dark_theme":""}`}>
+                    <Provider>
                         <div className="main">
                             <div className="gradient" />
                         </div>
@@ -23,10 +30,11 @@ const RootLayout = ({ children }) => {
                             <Nav />
                             {children}
                         </main>
-                    </ThemeProvider>
-                </Provider>
-            </body>
-        </html>
+
+                    </Provider>
+                </body>
+            </html>
+        </ThemeContext.Provider>
     )
 }
 

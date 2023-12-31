@@ -8,6 +8,15 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
+* {
+  transition: 0.25s;
+}
+
+.dark_theme {
+  color: #dfdfdf !important; 
+  background: #1d2e47 !important;
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -81,12 +90,24 @@
   @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
 
+.black_btn_dark {
+  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+}
+
 .outline_btn {
   @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
+.outline_btn_dark {
+  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+}
+
 
 .head_text {
   @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+}
+
+.head_text_dark {
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-[#dfdfdf] sm:text-6xl;
 }
 
 .orange_gradient {
@@ -103,6 +124,10 @@
 
 .desc {
   @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
+}
+
+.desc_dark {
+  @apply mt-5 text-lg text-gray-300 sm:text-xl max-w-2xl;
 }
 
 .search_input {
@@ -139,6 +164,11 @@
 .logo_text {
   @apply max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide;
 }
+
+.logo_text_dark {
+  @apply max-sm:hidden font-satoshi font-semibold text-lg text-[#dfdfdf] tracking-wide;
+}
+
 
 .dropdown {
   @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;

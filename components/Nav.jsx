@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "../app/layout";
 import { signIn, signOut, useSession, getProviders }
   from "next-auth/react";
 
 
 const Nav = () => {
 
-  // const session?.user = true;
+  const { isThemeDark, setIsThemeDark } = useContext(ThemeContext);
+
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -23,9 +25,10 @@ const Nav = () => {
     setUpProviders();
   }, [])
 
-const handleTheme = () => {
-  console.log("Theme change please!");
-}
+  const handleTheme = () => {
+    console.log("Theme change please!");
+    setIsThemeDark(prev => !prev);
+  }
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -38,15 +41,29 @@ const handleTheme = () => {
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">Promptopia</p>
+        <p className={`${isThemeDark ? "logo_text_dark" : "logo_text"}`}>Promptopia</p>
       </Link>
 
 
       {/* Desktop navigation */}
       <div className="sm:flex hidden">
+        <button className={`p-2.5 border-2 rounded-xl ${isThemeDark ? "bg-slate-700 border-slate-500 hover:bg-slate-500" : "bg-transparent border-gray-300 hover:bg-gray-300"} mr-6`} onClick={handleTheme}>
+          {isThemeDark ?
+            <Image
+              src="/assets/icons/brightness.png"
+              alt="Light Icon"
+              height={17}
+              width={17}
+            />
+            : <Image
+              src="/assets/icons/dark-mode-Icon.png"
+              alt="dark Icon"
+              height={17}
+              width={17}
+            />}
+        </button>
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            <button className="outline_btn active:bg-white active:text-black" onClick={handleTheme}>Dark</button>
             <Link href="/create-prompt" className="black_btn active:bg-black active:text-white">
               Create Post
             </Link>
@@ -83,6 +100,21 @@ const handleTheme = () => {
 
       {/* Mobile navigation */}
       <div className="sm:hidden flex relative">
+        <button className={`p-2.5 border-2 rounded-xl ${isThemeDark ? "bg-slate-700 border-slate-500 hover:bg-slate-500" : "bg-transparent border-gray-300 hover:bg-gray-300"} mr-6`} onClick={handleTheme}>
+          {isThemeDark ?
+            <Image
+              src="/assets/icons/brightness.png"
+              alt="Light Icon"
+              height={17}
+              width={17}
+            />
+            : <Image
+              src="/assets/icons/dark-mode-Icon.png"
+              alt="dark Icon"
+              height={17}
+              width={17}
+            />}
+        </button>
         {session?.user ? (
           <div className="flex">
             <Image
