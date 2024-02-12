@@ -7,10 +7,10 @@ import Provider from "@components/Provider";
 import { createContext, useState } from "react";
 import Head from "next/head"; // Import Head from Next.js
 
-export const metadata = {
-    title: "Promptopia",
-    description: "Discover and Share AI Prompts"
-}
+// export const metadata = {
+//     title: "Promptopia",
+//     description: "Discover and Share AI Prompts"
+// }
 
 export const ThemeContext = createContext();
 
@@ -21,7 +21,7 @@ const RootLayout = ({ children }) => {
         <html lang="en">
             <Head>
                 <title>"this is title"</title> {/* Set title using metadata */}
-                <meta name="description" content={metadata.description} /> {/* Set description */}
+                <meta name="description" content="Discover and Share AI Prompts" /> {/* Set description */}
                 {/* Add other metadata as needed */}
             </Head>
             <ThemeContext.Provider value={{ isThemeDark, setIsThemeDark }}>
