@@ -47,7 +47,7 @@ const Nav = () => {
 
       {/* Desktop navigation */}
       <div className="sm:flex hidden">
-        <button className={`p-2.5 border-2 rounded-xl ${isThemeDark ? "bg-slate-700 border-slate-500 hover:bg-slate-500" : "bg-transparent border-gray-300 hover:bg-gray-300"} mr-6`} onClick={handleTheme}>
+        <button className={`p-2.5 border rounded-xl ${isThemeDark ? "bg-slate-700 border-slate-500 hover:bg-slate-500" : "bg-transparent border-black hover:bg-gray-300"} mr-6`} onClick={handleTheme}>
           {isThemeDark ?
             <Image
               src="/assets/icons/brightness.png"
@@ -64,10 +64,10 @@ const Nav = () => {
         </button>
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn active:bg-black active:text-white">
+            <Link href="/create-prompt" className={`${isThemeDark?"black_btn_dark":"black_btn"} `}>
               Create Post
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn active:bg-white active:text-black">
+            <button type="button" onClick={signOut} className={`${isThemeDark?"outline_btn_dark":"outline_btn"} `}>
               Sign Out
             </button>
             <Link href="/profile">
@@ -100,7 +100,7 @@ const Nav = () => {
 
       {/* Mobile navigation */}
       <div className="sm:hidden flex relative">
-        <button className={`p-2.5 border-2 rounded-xl ${isThemeDark ? "bg-slate-700 border-slate-500 hover:bg-slate-500" : "bg-transparent border-gray-300 hover:bg-gray-300"} mr-6`} onClick={handleTheme}>
+        <button className={`p-2.5 border rounded-xl ${isThemeDark ? "bg-slate-700 border-slate-500 hover:bg-slate-500" : "bg-transparent border-gray-300 hover:bg-gray-300"} mr-6`} onClick={handleTheme}>
           {isThemeDark ?
             <Image
               src="/assets/icons/brightness.png"

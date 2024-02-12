@@ -97,7 +97,7 @@ const Feed = () => {
         <input
           type="text"
           value={inputText}
-          placeholder="Enter a tag of username"
+          placeholder="Enter a tag or prompt"
           // value={searchText}
           onChange={(e) => {
             setInputText(e.target.value);
