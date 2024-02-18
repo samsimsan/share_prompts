@@ -1,21 +1,25 @@
 // main layout.jsx
-"use client";
+
 
 import "@styles/globals.css";
-import Nav from "@components/Nav";
-import Provider from "@components/Provider";
-import { createContext, useState } from "react";
+
+
+// import { createContext, useState } from "react";
 import Head from "next/head"; // Import Head from Next.js
+import ThemeProviders from "@providers/ThemeProviders";
+import MiddleMan from "./middleMan";
 
-// export const metadata = {
-//     title: "Promptopia",
-//     description: "Discover and Share AI Prompts"
-// }
+export const metadata = {
+    title: "Promptopia",
+    description: "Discover and Share AI Prompts"
+}
 
-export const ThemeContext = createContext();
+// export const ThemeContext = createContext();
+
+
 
 const RootLayout = ({ children }) => {
-    const [isThemeDark, setIsThemeDark] = useState(false);
+    // const [isThemeDark, setIsThemeDark] = useState(false);
 
     return (
         <html lang="en">
@@ -24,19 +28,12 @@ const RootLayout = ({ children }) => {
                 <meta name="description" content="Discover and Share AI Prompts" /> {/* Set description */}
                 {/* Add other metadata as needed */}
             </Head>
-            <ThemeContext.Provider value={{ isThemeDark, setIsThemeDark }}>
-                <body className={`${isThemeDark ? "dark_theme" : ""}`}>
-                    <Provider>
-                        <div className="main">
-                            <div className="gradient" />
-                        </div>
-                        <main className="app">
-                            <Nav />
-                            {children}
-                        </main>
-                    </Provider>
-                </body>
-            </ThemeContext.Provider>
+            {/* <ThemeContext.Provider value={{ isThemeDark, setIsThemeDark }}> */}
+            <ThemeProviders>
+                <MiddleMan>
+                    {children}
+                </MiddleMan>
+            </ThemeProviders>
         </html>
     )
 }

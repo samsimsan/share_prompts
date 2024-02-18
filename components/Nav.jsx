@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useContext } from "react";
-import { ThemeContext } from "../app/layout";
+// import { ThemeContext } from "../app/layout";
+import { ThemeContext } from "@providers/ThemeProviders";
 import { signIn, signOut, useSession, getProviders }
   from "next-auth/react";
 

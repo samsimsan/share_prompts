@@ -1,7 +1,8 @@
 "use client";
 
 import { useContext } from "react";
-import { ThemeContext } from "@app/layout";
+// import { ThemeContext } from "@app/layout";
+import { ThemeContext } from "@providers/ThemeProviders";
 import PromptCard from "./PromptCard"
 
 const Profile = ({ profname, desc, data, handleEdit, handleDelete }) => {

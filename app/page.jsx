@@ -1,7 +1,8 @@
 "use client";
 
 import { useContext } from "react";
-import { ThemeContext } from "./layout";
+// import { ThemeContext } from "./layout";
+import { ThemeContext } from "@providers/ThemeProviders";
 import Feed from "@components/Feed";
 
 

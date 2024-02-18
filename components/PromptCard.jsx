@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-import { ThemeContext } from "@app/layout";
+// import { ThemeContext } from "@app/layout";
+import { ThemeContext } from "@providers/ThemeProviders";
 
 const PromptCard = ({ post, prompthandleTagsAreClicked, handleEditpost, handleDeletepost }) => {
 

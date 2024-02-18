@@ -1,6 +1,7 @@
 "use client";
 
-import { ThemeContext } from "@app/layout";
+// import { ThemeContext } from "@app/layout";
+import { ThemeContext } from "@providers/ThemeProviders";
 import Link from "next/link"
 import { useContext } from "react";
 
