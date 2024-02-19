@@ -19,13 +19,9 @@ const EditPrompt = () => {
     useEffect(() => {
 
         const getPromptDetails = async () => {
-            console.log("inside getPromptDetails");
             const response = await fetch(`api/prompt/${promptId}`);
             const data = await response.json();
-            console.log("got the api data");
-            console.log("data:");
-            console.log("prompt: ", data.prompt);
-            console.log("tag: ", data.tag);
+            
             setPost({
                 prompt: data.prompt,
                 tag: data.tag
@@ -44,7 +40,6 @@ const EditPrompt = () => {
         if (!promptId) return alert("Missing PromptId");
 
         try {
-            console.log("editPrompt fucntion is called");
             const response = await fetch(`/api/prompt/${promptId}`, {
                 method: "PATCH",
                 body: JSON.stringify({
@@ -52,14 +47,11 @@ const EditPrompt = () => {
                     tag: post.tag
                 })
             })
-            console.log("patch api is executed");
 
             if (response.ok) {
-                console.log("response is OK");
                 router.push("/")
             }
         } catch (error) {
-            console.log(error);
         } finally {
             setSubmitting(false);
         }

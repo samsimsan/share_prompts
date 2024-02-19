@@ -27,7 +27,6 @@ const Nav = () => {
   }, [])
 
   const handleTheme = () => {
-    // console.log("Theme change please!");
     setIsThemeDark(prev => !prev);
   }
 
