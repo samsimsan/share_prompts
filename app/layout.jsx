@@ -11,7 +11,21 @@ import MiddleMan from "./middleMan";
 
 export const metadata = {
     title: "Promptopia",
-    description: "Discover and Share AI Prompts"
+    description: "Discover and Share AI Prompts",
+    icons: {
+        icon: [
+          {
+            media: "(prefers-color-scheme: light)",
+            url: "/assets/images/logo.svg",
+            href: "/assets/images/logo.svg"
+          },
+          {
+            media: "",
+            url: "/assets/images/logo.svg",
+            href: "/assets/images/logo.svg"
+          }
+        ]
+      }
 }
 
 // export const ThemeContext = createContext();
