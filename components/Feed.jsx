@@ -70,7 +70,7 @@ const Feed = () => {
     }
     else {
       const fetchPosts = async () => {
-        const response = await fetch("/api/prompt");
+        const response = await fetch("/api/prompt/getAll");
         const data = await response.json();
         setAllPosts(data);
       }
@@ -81,7 +81,7 @@ const Feed = () => {
   //api call in the begining to fill the feed with the data
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/prompt");
+      const response = await fetch("/api/prompt/getAll");
       const data = await response.json();
 
       setAllPosts(data);
