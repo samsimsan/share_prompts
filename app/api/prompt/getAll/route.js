@@ -13,7 +13,13 @@ export const GET = async (request) => {
 
         const prompts = await Prompt.find({}).populate("creator"); //get all prompts and populate it with the creator value
 
-        return new Response(JSON.stringify(prompts), { status: 200 });
+        return new Response(JSON.stringify(prompts), { 
+            status: 200,
+            headers: {
+                'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate'
+            }
+        
+        });
 
     } catch (error) {
         return new Response("Failed to fetch all the prompts", { status: 500 });
